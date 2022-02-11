@@ -18,3 +18,18 @@ img {
   align-items: center;
   flex-direction: column;
 }
+
+ul {
+  list-style-type: none;
+  display: flex;
+}
+li {
+  margin: 0 8px;
+}
+
+.pagination-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+}

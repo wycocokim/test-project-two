@@ -1,7 +1,13 @@
 import React from "react";
 import "./Gallery.css";
 
-const Gallery = ({ allPokemons }) => {
+const Gallery = ({ allPokemons, totalPosts, postsPerPage, paginate }) => {
+  const pageNumbers = [];
+
+  for (let i = 1; i <= Math.ceil(totalPosts / postsPerPage); i++) {
+    pageNumbers.push(i);
+  }
+
   return (
     <div className="container">
       <div className="grid">
@@ -26,6 +32,21 @@ const Gallery = ({ allPokemons }) => {
             );
           }
         })}
+      </div>
+      <div className="pagination-wrapper">
+        <ul>
+          {pageNumbers.map((number) => (
+            <li key={number}>
+              <button
+                onClick={() => {
+                  paginate(number);
+                }}
+              >
+                {number}
+              </button>
+            </li>
+          ))}
+        </ul>
       </div>
     </div>
   );
