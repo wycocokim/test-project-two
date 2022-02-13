@@ -3,6 +3,7 @@ import "./App.css";
 import Gallery from "./components/Gallery";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Home from "./components/Home";
+import Favourite from "./components/Favourite";
 
 function App() {
   const [allPokemons, setAllPokemons] = useState([]);
@@ -58,11 +59,10 @@ function App() {
             />
           }
         />
+        <Route path="/favourites" element={<Favourite />} />
       </Routes>
     </Router>
   );
-
-  // <Gallery allPokemons={allPokemons} />;
 }
 
 export default App;

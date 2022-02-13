@@ -1,15 +1,49 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import "./Gallery.css";
+import { useDispatch } from "react-redux";
+import { addPokemon } from "../features/pokemonSlice";
+// import { allPokemon } from "../features/pokemonSlice";
 
 const Gallery = ({ allPokemons, totalPosts, postsPerPage, paginate }) => {
+  // const allPokemonsList = useSelector(allPokemon);
+  const [favourites, setFavourites] = useState([]);
+
   const pageNumbers = [];
 
   for (let i = 1; i <= Math.ceil(totalPosts / postsPerPage); i++) {
     pageNumbers.push(i);
   }
 
+  useEffect(() => {
+    const dataList = localStorage.getItem("my-pokemon-list");
+    if (dataList) {
+      setFavourites(JSON.parse(dataList));
+    }
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem("my-pokemon-list", JSON.stringify(favourites));
+  });
+
+  const dispatch = useDispatch();
+
+  const addFavouritePokemon = (pokemon) => {
+    const newFavouriteList = [...favourites, pokemon];
+
+    setFavourites(newFavouriteList);
+    dispatch(
+      addPokemon({
+        pokemon: newFavouriteList,
+      })
+    );
+    alert("pokemon added to favourites");
+  };
+
   return (
     <div className="container">
+      <a href="/favourites">
+        <button className="button-favourites">go to favourites page</button>
+      </a>
       <div className="grid">
         {allPokemons.map((pokemon, index) => {
           if (allPokemons) {
@@ -26,7 +60,9 @@ const Gallery = ({ allPokemons, totalPosts, postsPerPage, paginate }) => {
                       <h4>{pokemon.types[0].type.name}</h4>
                     </div>
                   </div>
-                  <button>save pokemon</button>
+                  <button onClick={() => addFavouritePokemon(pokemon)}>
+                    save pokemon
+                  </button>
                 </div>
               </div>
             );

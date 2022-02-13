@@ -33,3 +33,7 @@ li {
   align-items: center;
   margin-top: 20px;
 }
+
+.button-favourites {
+  margin: 32px 0;
+}

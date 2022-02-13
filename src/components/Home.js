@@ -1,7 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { login } from "../features/userSlice";
 import { useNavigate } from "react-router-dom";
+import { selectUser } from "../features/userSlice";
+import { useSelector } from "react-redux";
 import "./Home.css";
 
 const Home = () => {
@@ -11,6 +13,8 @@ const Home = () => {
   const [error, setError] = useState("");
   const [valid, setValid] = useState(false);
   const [success, setSuccess] = useState(false);
+
+  const user = useSelector(selectUser);
 
   let navigate = useNavigate();
 
@@ -35,6 +39,7 @@ const Home = () => {
         })
       );
       setSuccess(true);
+      console.log(success);
       navigate("/gallery");
     } else {
       alert("please put a valid email");
@@ -59,22 +64,21 @@ const Home = () => {
   };
 
   return (
-    <div className="container">
+    <div className="container home">
       <h1>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis finibus
-        ultricies magna quis dapibus. Aliquam erat volutpat. Praesent gravida
-        odio sed nulla tincidunt placerat. Aliquam nec volutpat justo. Aliquam
-        condimentum tincidunt nisl. Cras mollis a magna eget ornare. Praesent
-        congue quis turpis eu vestibulum. Suspendisse id tempor eros. Ut
-        fringilla, nisl sit amet dapibus imperdiet, mauris elit iaculis nisi,
-        suscipit bibendum felis dui eu mauris. Aliquam vitae vestibulum erat.
-        Sed ac magna felis. Sed vitae urna porta, auctor sem et, ullamcorper
-        neque. Sed felis lorem, accumsan tincidunt volutpat nec, tempus ut
-        ligula. Proin quis purus at ex placerat pulvinar. Duis porta velit
-        ligula, feugiat mattis enim maximus eget. Sed ut lectus porttitor,
-        aliquet ligula ac, hendrerit libero.
+        after completing the project i learned how to use state management tool
+        like redux, store data on redux and reuse it, creating pagination. most
+        challenging part was to create a functionality that you can save the
+        pokemon and show the saved pokemon on another page.
       </h1>
-      <button onClick={openModal}>Login</button>
+      {user ? (
+        <h2>{`welcome ${user.email}`}</h2>
+      ) : (
+        <button className="home-button" onClick={openModal}>
+          Login
+        </button>
+      )}
+
       <div className={modalOpen ? "modal active" : "modal"}>
         <div className="modal-bg" onClick={closeModal}></div>
         <div className="modal-content">
