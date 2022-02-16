@@ -12,6 +12,7 @@ function App() {
   );
   const [currentPage, setCurrentPage] = useState(1);
   const [postsPerPage] = useState(10);
+  const [loading, setLoading] = useState(false);
 
   const getAllPokemon = async () => {
     const res = await fetch(loadMore);
@@ -20,6 +21,7 @@ function App() {
     setLoadmore(data.next);
 
     function createPokemonObject(result) {
+      setLoading(true);
       result.forEach(async (pokemon) => {
         const res = await fetch(
           `https://pokeapi.co/api/v2/pokemon/${pokemon.name} `
@@ -27,6 +29,7 @@ function App() {
         const data = await res.json();
 
         setAllPokemons((currentList) => [...currentList, data]);
+        setLoading(false);
       });
     }
     createPokemonObject(data.results);
@@ -55,6 +58,7 @@ function App() {
               allPokemons={currentPosts}
               postsPerPage={postsPerPage}
               totalPosts={allPokemons.length}
+              loading={loading}
               paginate={paginate}
             />
           }

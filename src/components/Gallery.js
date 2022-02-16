@@ -2,10 +2,14 @@ import React, { useState, useEffect } from "react";
 import "./Gallery.css";
 import { useDispatch } from "react-redux";
 import { addPokemon } from "../features/pokemonSlice";
-// import { allPokemon } from "../features/pokemonSlice";
 
-const Gallery = ({ allPokemons, totalPosts, postsPerPage, paginate }) => {
-  // const allPokemonsList = useSelector(allPokemon);
+const Gallery = ({
+  allPokemons,
+  totalPosts,
+  postsPerPage,
+  paginate,
+  loading,
+}) => {
   const [favourites, setFavourites] = useState([]);
 
   const pageNumbers = [];
@@ -38,6 +42,14 @@ const Gallery = ({ allPokemons, totalPosts, postsPerPage, paginate }) => {
     );
     alert("pokemon added to favourites");
   };
+
+  if (loading) {
+    return (
+      <div className="loading-wrapper">
+        <h2>loading...</h2>
+      </div>
+    );
+  }
 
   return (
     <div className="container">

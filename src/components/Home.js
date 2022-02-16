@@ -7,7 +7,6 @@ import { useSelector } from "react-redux";
 import "./Home.css";
 
 const Home = () => {
-  //   console.log(posts.results);
   const [modalOpen, setModalOpen] = useState(false);
   const [email, setEmail] = useState("");
   const [error, setError] = useState("");
