@@ -58,9 +58,9 @@ const Gallery = ({
         <button className="button-favourites">go to favourites page</button>
       </Link>
       <div className="grid">
-        {allPokemons.map((pokemon, index) => {
-          if (allPokemons) {
-            return (
+        {allPokemons
+          ? allPokemons.map((pokemon, index) => (
+              //  retrun if allpokemons array are defined
               <div key={index}>
                 <div className="grid-item">
                   <div>
@@ -78,9 +78,8 @@ const Gallery = ({
                   </button>
                 </div>
               </div>
-            );
-          }
-        })}
+            ))
+          : null}
       </div>
       <div className="pagination-wrapper">
         <ul>

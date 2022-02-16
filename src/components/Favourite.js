@@ -4,7 +4,8 @@ import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
 const Favourite = () => {
-  const allPokemons = useSelector(allPokemon);
+  const allPokemonsList = useSelector(allPokemon);
+  const allPokemons = allPokemonsList.pokemon;
 
   return (
     <div className="container">
@@ -12,10 +13,9 @@ const Favourite = () => {
         <button className="button-favourites">go to gallery page</button>
       </Link>
       <div className="grid">
-        {!allPokemons.pokemon ? (
-          <h1>no favourites</h1>
-        ) : (
-          allPokemons.pokemon.map((pokemon, key) => (
+        {allPokemons ? (
+          allPokemons.map((pokemon, key) => (
+            // return if allPokemons is defined
             <div key={key}>
               <div className="grid-item">
                 <div>
@@ -31,6 +31,8 @@ const Favourite = () => {
               </div>
             </div>
           ))
+        ) : (
+          <h1>no favourites</h1>
         )}
       </div>
     </div>
