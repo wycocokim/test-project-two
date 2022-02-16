@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import "./Gallery.css";
 import { useDispatch } from "react-redux";
 import { addPokemon } from "../features/pokemonSlice";
+import { Link } from "react-router-dom";
 
 const Gallery = ({
   allPokemons,
@@ -53,9 +54,9 @@ const Gallery = ({
 
   return (
     <div className="container">
-      <a href="/favourites">
+      <Link to="/favourites">
         <button className="button-favourites">go to favourites page</button>
-      </a>
+      </Link>
       <div className="grid">
         {allPokemons.map((pokemon, index) => {
           if (allPokemons) {

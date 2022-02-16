@@ -1,15 +1,16 @@
 import React from "react";
 import { allPokemon } from "../features/pokemonSlice";
 import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 
 const Favourite = () => {
   const allPokemons = useSelector(allPokemon);
 
   return (
     <div className="container">
-      <a href="/gallery">
+      <Link to="/gallery">
         <button className="button-favourites">go to gallery page</button>
-      </a>
+      </Link>
       <div className="grid">
         {!allPokemons.pokemon ? (
           <h1>no favourites</h1>
