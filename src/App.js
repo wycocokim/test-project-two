@@ -6,19 +6,15 @@ import Home from "./components/Home";
 import Favourite from "./components/Favourite";
 
 function App() {
-  const [allPokemons, setAllPokemons] = useState([]);
-  const [loadMore, setLoadmore] = useState(
-    "https://pokeapi.co/api/v2/pokemon?limit=50"
-  );
   const [currentPage, setCurrentPage] = useState(1);
   const [postsPerPage] = useState(10);
   const [loading, setLoading] = useState(false);
+  const [allPokemons, setAllPokemons] = useState([]);
 
   const getAllPokemon = async () => {
-    const res = await fetch(loadMore);
-    const data = await res.json();
-
-    setLoadmore(data.next);
+    const data = await fetch("https://pokeapi.co/api/v2/pokemon?limit=50").then(
+      (res) => res.json()
+    );
 
     function createPokemonObject(result) {
       setLoading(true);
